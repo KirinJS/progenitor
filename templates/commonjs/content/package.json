@@ -1,0 +1,34 @@
+{
+  "name": "__project_name__",
+  "description": "__project_description__",
+  "version": "0.1.0",
+  "homepage": "__project_homepage__",
+  "author": {
+    "name": "__project_author__",
+    "email": "__project_author_email__",
+    "url": "__project_author_url__"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://__git_repo__.git"
+  },
+  "bugs": {
+    "url": "__project_issues__"
+  },
+  "licenses": [
+    {
+      "type": "APACHE",
+      "url": "__project_page__/blob/master/LICENSE"
+    }
+  ],
+  "main": "__module_entry_point__",
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+  },
+  "dependencies": {},
+  "devDependencies": {
+  },
+  "keywords": []
+}

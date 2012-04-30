@@ -1,0 +1,3 @@
+The __animal__ sat on the __thing__.
+
+It didn't __verb__.
