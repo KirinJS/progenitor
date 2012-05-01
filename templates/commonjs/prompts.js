@@ -1,4 +1,4 @@
-exports.properties = { 
+exports.prompts = { 
     project_name: {
         message: "Project name",
         validator: /[a-zA-Z][\w*]/
