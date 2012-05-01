@@ -32,6 +32,7 @@
   "engines": {
     "node": "*"
   },
+  "bin": "./bin/cli.js",
   "scripts": {
     "test": "nodeunit test/progenitor_test.js"
   },
