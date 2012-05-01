@@ -3,28 +3,7 @@
 var path = require("path"),
     fs = require("fs");
 
-var templateDir = path.join(__dirname, "..", "templates");
 
-function checkTemplateName (name) {
-    function exists (filepath) {
-        if (fs.existsSync) {
-            return fs.existsSync(filepath);
-        } else {
-            return path.existsSync(filepath);
-        }
-    }
-    var myTemplatePath = path.join(templateDir, name);
-    if (exists(myTemplatePath)) {
-        return myTemplatePath;
-    } else {
-        return null;
-    }
-}
-
-
-function getExistingTemplateNames () {
-    return fs.readdirSync(templateDir);
-}
 
 var argv = require('optimist')
     .usage('Usage: $0 {OPTIONS}')
@@ -38,6 +17,9 @@ var argv = require('optimist')
     .option('template', {
         alias: "t",
         desc: "The name of a template. This should exist in the templates directory"
+    })
+    .option('templates', {
+        desc: "The path to the templates directory"
     })
     .option('dest', {
         alias : 'd',
@@ -63,19 +45,13 @@ var argv = require('optimist')
         desc : 'Show this message'
     })
     .check(function (argv) {
+        if (argv.help) throw '';
         argv.verbose = argv.verbose || argv.debug;
-        if (argv.template) {
-            var templateDir = checkTemplateName(argv.template);
-            if (!templateDir) {
-                var templates = getExistingTemplateNames();
-                templates.unshift("Ready made templates available are:");
-                throw templates.join("\n * ");
-            }
-            argv.src = templateDir;
+        if (!(argv.src || argv.template)) {
+            throw "You need to specify either the name of a template (using -t) or the path to a template (using -s <path>)";
         }
         
-        if (argv.help) throw '';
-        if (!(argv.dest || argv.generate) && !argv.src) throw "You need to specify both a source and a target";
+        if (!(argv.dest || argv.generate)) throw "You need to specify either a destination where the new project will be (using -d)";
     })
     .argv;
 
