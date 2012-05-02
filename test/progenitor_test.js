@@ -106,6 +106,40 @@ exports.textReplacement = {
         test.equal(progenitor.textReplace("xxXFOOXxx", optionSelector), "xcatx");
         
 	    test.done();
+	},
+	
+	emptyString: function (test) {
+	    test.expect(2);
+        
+        var options = { empty: "" };
+        var optionSelector = progenitor.createOptionSelector(options);
+        
+        test.equal(progenitor.textReplace("__empty__", optionSelector), "");
+        test.equal(progenitor.textReplace("__undefined__", optionSelector), "__undefined__");
+        
+        test.done();
+	},
+	
+	bugFix: function (test) {
+	    test.expect(1);
+	    
+	    var options = {
+	            "shortName": "mynewapp", 
+	            "contextPackage": "__companyIdentifier__xXJAVA_PACKAGEXx",
+	            "JAVA_PACKAGE": "",
+	            "companyIdentifier": "com.example"
+	    };
+        var optionSelector = progenitor.createOptionSelector(options);
+        test.expect(2);
+        
+        
+        
+        test.equal(progenitor.textReplace("xXcontextPackageXx.xXshortNameXx", optionSelector), 
+        "com.example.mynewapp");
+        test.equal(progenitor.textReplace("__companyIdentifier__{{JAVA_PACKAGE}}.mynewapp", optionSelector), 
+            "com.example.mynewapp");
+	    
+	    test.done();
 	}
 };
 
