@@ -120,6 +120,21 @@ exports.textReplacement = {
         test.done();
 	},
 	
+	consecutiveVariables: function (test) {
+	    test.expect(4);
+	    
+	    var options = { foo: "fizz", bar: "buzz" };
+        var optionSelector = progenitor.createOptionSelector(options);
+	    
+        test.equal(progenitor.textReplace("{{foo}}{{bar}}", optionSelector), "fizzbuzz");
+        test.equal(progenitor.textReplace("xXfooXxxXbarXx", optionSelector), "fizzbuzz");
+        test.equal(progenitor.textReplace("--foo----bar--", optionSelector), "fizzbuzz");
+        test.equal(progenitor.textReplace("__foo____bar__", optionSelector), "fizzbuzz");
+        
+	    
+	    test.done();
+	},
+	
 	bugFix: function (test) {
 	    test.expect(1);
 	    
