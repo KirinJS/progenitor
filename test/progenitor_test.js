@@ -86,6 +86,26 @@ exports.textReplacement = {
 		test.equal(progenitor.textReplace(s, optionSelector), "My cat loves my cat's mum");
 		
 		test.done();
+	},
+	
+	multipleDelimeters: function (test) {
+	    var options = {"FOO": "cat", "BAR": "fish"};
+        var optionSelector = progenitor.createOptionSelector(options);
+        test.expect(7);
+	    
+        test.equal(progenitor.textReplace("My {{FOO}} loves {{BAR}}", optionSelector), 
+            "My cat loves fish");
+        test.equal(progenitor.textReplace("My xXFOOXx loves xXBARXx", optionSelector), 
+            "My cat loves fish");
+        test.equal(progenitor.textReplace("My --FOO-- loves --BAR--", optionSelector), 
+            "My cat loves fish");
+        test.equal(progenitor.textReplace("My --FOO-- hates --CHEESE--", optionSelector), 
+            "My cat hates --CHEESE--"); 
+        test.equal(progenitor.textReplace("{{{FOO}}}", optionSelector), "{cat}");
+        test.equal(progenitor.textReplace("---FOO---", optionSelector), "-cat-");
+        test.equal(progenitor.textReplace("xxXFOOXxx", optionSelector), "xcatx");
+        
+	    test.done();
 	}
 };
 
