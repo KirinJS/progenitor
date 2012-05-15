@@ -40,6 +40,10 @@ var argv = require('optimist')
         alias : 'v',
         desc : "I'll show my working."
     })
+    .option('writeOptions', {
+        desc: "Persist the options used to generate the last file in a place where it'll be readable",
+        default: true
+    })
     .option('help', {
         alias : 'h',
         desc : 'Show this message'
