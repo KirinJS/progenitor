@@ -18,7 +18,7 @@
   "licenses": [
     {
       "type": "APACHE",
-      "url": "__project_page__/blob/master/LICENSE"
+      "url": "__project_homepage__/blob/master/LICENSE"
     }
   ],
   "main": "__module_entry_point__",
